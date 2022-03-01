@@ -19,7 +19,7 @@ public class JavierHello extends HttpServlet // Inheriting from HttpServlet make
         out.println("<title>Servlet example</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<p>My first servlet.</p>");
+        out.println("<p>Javier's first servlet.</p>");
         out.println("</body>");
         out.println("</html>");
         out.close();
