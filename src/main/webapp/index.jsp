@@ -21,7 +21,7 @@
     <button onclick="window.location.assign(servletURL+'/json');">JSON File persistence servlet </button>
     <button onclick="window.location.assign(servletURL+'/xml');">XML File persistence servlet </button>
     <button onclick="window.location.assign(servletURL+'/database');">Database persistence servlet </button>
-    <button onclick="window.location.assign(servletURL+'/javierHello');"> Two Buttons servlet </button>
+    <button onclick="window.location.assign(servletURL+'/javierHello');">Javier Hello</button>
   </div>
 </body>
 </html>
