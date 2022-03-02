@@ -45,7 +45,7 @@ public class twoButtons extends HttpServlet
 static String Servlet = "twoButtons";
 
 // Button labels
-static String OperationAdd = "Add";
+static String OperationSubmit = "Submit";
 static String OperationSub = "Subtract";
 
 // Other strings.
@@ -75,7 +75,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
       rhsVal = rhsStr;
    }
 
-   if (operation.equals(OperationAdd))
+   if (operation.equals(OperationSubmit))
    {
       rslt = lhsVal + rhsVal;
    }
@@ -133,11 +133,11 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
    out.println("");
    out.println(" <table>");
    out.println("  <tr>");
-   out.println("   <td>First value:");
+   out.println("   <td>String A:");
    out.println("   <td><input type=\"text\" name=\"LHS\" value=\"" + lhs + "\" size=5>");
    out.println("  </tr>");
    out.println("  <tr>");
-   out.println("   <td>Second value:");
+   out.println("   <td>String B:");
    out.println("   <td><input type=\"text\" name=\"RHS\" value=\"" + rhs + "\" size=5>");
    out.println("  </tr>");
    out.println("  <tr>");
@@ -148,7 +148,6 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
    out.println(" <br>");
    out.println(" <br>");
    out.println(" <input type=\"submit\" value=\"" + OperationAdd + "\" name=\"Operation\">");
-   out.println(" <input type=\"submit\" value=\"" + OperationSub + "\" name=\"Operation\">");
    out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
    out.println("</form>");
    out.println("");
