@@ -147,7 +147,7 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
    out.println(" </table>");
    out.println(" <br>");
    out.println(" <br>");
-   out.println(" <input type=\"submit\" value=\"" + OperationAdd + "\" name=\"Operation\">");
+   out.println(" <input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
    out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
    out.println("</form>");
    out.println("");
