@@ -67,6 +67,14 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    String lhsStr = request.getParameter("LHS");
    String rhsStr = request.getParameter("RHS");
 
+   if(lhsStr != null){
+      lhsVal = lhsStr;
+   }
+
+   if(rhsVal != null){
+      rhsVal = rhsStr;
+   }
+
    if (operation.equals(OperationAdd))
    {
       rslt = lhsVal + rhsVal;
