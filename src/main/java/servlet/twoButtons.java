@@ -45,8 +45,8 @@ public class twoButtons extends HttpServlet
 static String Servlet = "twoButtons";
 
 // Button labels
-static String OperationSubmit = "Submit";
-static String OperationSub = "Subtract";
+static String OperationSubmit = "Concat";
+static String OperationReverseSubmit = "ReverseConcat";
 
 // Other strings.
 static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
@@ -78,6 +78,8 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    if (operation.equals(OperationSubmit))
    {
       rslt = lhsVal + rhsVal;
+   }else if(operation.equals(OperationReverseSubmit)){
+      rslt = rhsVal + lhsVal;
    }
 
    response.setContentType("text/html");
@@ -148,6 +150,7 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
    out.println(" <br>");
    out.println(" <br>");
    out.println(" <input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
+   out.println(" <input type=\"submit\" value=\"" + OperationReverseSubmit + "\" name=\"Operation\">");
    out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
    out.println("</form>");
    out.println("");
