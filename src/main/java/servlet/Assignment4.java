@@ -108,7 +108,7 @@ public class Assignment4 extends HttpServlet
                 }
                 showValues += "\n Characteristic " + (i+1) + " [";
                 for(int j = 0; j < val; j++){
-                    showValues += c + " ";
+                    showValues += j + " ";
                 }
 
                 showValues += " ]";
