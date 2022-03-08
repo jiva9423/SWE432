@@ -156,14 +156,14 @@ public class Assignment4 extends HttpServlet
         out.println(" <table>");
         out.println("  <tr>");
         out.println("   <td>How many characteristics? (enter an integer greater than 0):");
-        out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\"" + charNum + "\" size=5>");
+        out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\""+ charNum +"\" size=5>");
         out.println("  </tr>");
         for(int i = 0; i < rslt; i++){
             String name = "RSLT" + i;
             out.println("  <br>");
             out.println("  <tr>");
             out.println("   <td>Characteristic " + (i + 1) + " :");
-            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\" "+ vals.get(i) +" \" size=6>");
+            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\""+vals.get(i)+" \" size=6>");
         }
 
         out.println("<p>");
