@@ -106,6 +106,9 @@ public class Assignment4 extends HttpServlet
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
+        if(operation.equals(OperationShow)){
+            out.println("alert('" + showValues + "');");
+        }
         PrintBody(out, characteristicStr, rslt, showValues, vals);
         PrintTail(out);
     }  // End doPost
@@ -148,7 +151,7 @@ public class Assignment4 extends HttpServlet
     {
         out.println("<body>");
         out.println("<p>");
-        out.println("A simple example that demonstrates how to operate with");
+        out.println("Javier Talavera, David Blatman");
         out.println("multiple submit buttons.");
         out.println("</p>");
         out.print  ("<form method=\"post\"");
