@@ -98,11 +98,8 @@ public class Assignment4 extends HttpServlet
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
                 vals.add(c);
-                showValues += "\n Characteristic " + (i+1) + "[";
-                for(int j = 0; j < Integer.parseInt(c); j++){
-                    showValues += " " + c + (j + 1);
-                }
-                showValues += "]";
+                showValues += "\n Characteristic " + (i+1) + "";
+                showValues += c;
             }
         }
 
@@ -160,7 +157,7 @@ public class Assignment4 extends HttpServlet
         out.println(" <table>");
         out.println("  <tr>");
         out.println("   <td>How many characteristics? (enter an integer greater than 0):");
-        out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\""+ charNum +"\" size=5>");
+        out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\""+charNum+"\" size=5>");
         out.println(" <em> </tr>");
         for(int i = 0; i < rslt; i++){
             String name = "RSLT" + i;
