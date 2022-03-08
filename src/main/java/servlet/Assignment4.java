@@ -68,6 +68,7 @@ public class Assignment4 extends HttpServlet
         ArrayList<String> vals = new ArrayList<>();
         String operation = request.getParameter("Operation");
         String characteristicStr = request.getParameter("CHARNUM");
+        boolean errors = false;
 
         if(characteristicStr != null){
             try{
@@ -75,7 +76,7 @@ public class Assignment4 extends HttpServlet
                 if(val > 0){
                     charNumVal = val;
                 }else{
-
+                    errors = true;
                 }
             }catch (NumberFormatException e){
                 charNumVal = 0;
@@ -97,9 +98,20 @@ public class Assignment4 extends HttpServlet
             rslt = charNumVal;
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
+                c = c.replaceAll(" ", "");
                 vals.add(c);
-                showValues += "\n Characteristic " + (i+1) + ":";
-                showValues += c + ",\n";
+                int val = -1;
+                try{
+                    val = Integer.parseInt(c);
+                }catch (NumberFormatException e){
+                    val = 0;
+                }
+                showValues += "\n Characteristic " + (i+1) + " [";
+                for(int j = 0; j < val; j++){
+                    showValues += c + " ";
+                }
+
+                showValues += " ]";
             }
         }
 
