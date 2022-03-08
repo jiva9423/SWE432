@@ -65,6 +65,7 @@ public class Assignment4 extends HttpServlet
     {
         int rslt = 0;
         int charNumVal = 0;
+        ArrayList<String> vals = new ArrayList<>();
         String operation = request.getParameter("Operation");
         String characteristicStr = request.getParameter("CHARNUM");
 
@@ -93,6 +94,7 @@ public class Assignment4 extends HttpServlet
             rslt = charNumVal;
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
+                vals.add(i, c);
                 showValues += " " + c;
             }
         }
@@ -100,7 +102,7 @@ public class Assignment4 extends HttpServlet
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        PrintBody(out, characteristicStr, rslt, showValues);
+        PrintBody(out, characteristicStr, rslt, showValues, vals);
         PrintTail(out);
     }  // End doPost
 
@@ -138,7 +140,7 @@ public class Assignment4 extends HttpServlet
      *  Prints the <BODY> of the HTML page with the form data
      *  values from the parameters.
      ********************************************************* */
-    private void PrintBody (PrintWriter out, String charNum, int rslt, String show)
+    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals)
     {
         out.println("<body>");
         out.println("<p>");
@@ -158,7 +160,7 @@ public class Assignment4 extends HttpServlet
             out.println("  <br>");
             out.println("  <tr>");
             out.println("   <td>Characteristic " + (i + 1) + " :");
-            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\" \" size=6>");
+            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\""+ vals.get(i) +"\" size=6>");
         }
 
         out.println("<p>");
@@ -182,7 +184,7 @@ public class Assignment4 extends HttpServlet
      ********************************************************* */
     private void PrintBody (PrintWriter out)
     {
-        PrintBody(out, "", 0, "");
+        PrintBody(out, "", 0, "", new ArrayList<String>());
     }
 
     /** *****************************************************
