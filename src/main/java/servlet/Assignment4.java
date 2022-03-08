@@ -44,11 +44,10 @@ public class Assignment4 extends HttpServlet
     // Location of servlet.
 // static String Domain  = "cs.gmu.edu:8443";
 // static String Path    = "/offutt/servlet/";
-    static String Servlet = "twoButtons";
+    static String Servlet = "assignment4";
 
     // Button labels
-    static String OperationSubmit = "Concat";
-    static String OperationReverseSubmit = "ReverseConcat";
+    static String OperationSubmit = "Submit";
 
     // Other strings.
     static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
