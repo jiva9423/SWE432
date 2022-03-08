@@ -98,7 +98,11 @@ public class Assignment4 extends HttpServlet
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
                 vals.add(c);
-                showValues += " " + c;
+                showValues += "\n Characteristic " + (i+1) + "[";
+                for(int j = 0; j < Integer.parseInt(c); j++){
+                    showValues += " " + c + (j + 1);
+                }
+                showValues += "]";
             }
         }
 
