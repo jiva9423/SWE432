@@ -48,6 +48,8 @@ public class Assignment4 extends HttpServlet
 
     // Button labels
     static String OperationSubmit = "Submit";
+    static String OperationShow = "Show";
+    static int numInputs = 0;
 
     // Other strings.
     static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
@@ -82,6 +84,16 @@ public class Assignment4 extends HttpServlet
         if (operation.equals(OperationSubmit))
         {
             rslt = charNumVal;
+            numInputs = rslt;
+        }
+
+        String Showvalues = "";
+        if (operation.equals(OperationShow))
+        {
+            for(int i = 0; i < numInputs; i++){
+                String c = request.getParameter("RSLT" + numInputs);
+                Showvalues += " " + c;
+            }
         }
 
         response.setContentType("text/html");
@@ -141,16 +153,18 @@ public class Assignment4 extends HttpServlet
         out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\"" + charNum + "\" size=5>");
         out.println("  </tr>");
         out.println("  <tr>");
-        out.println("   <td>Result:");
         for(int i = 0; i < rslt; i++){
-            String name = "RSLT" + String.valueOf(i);
-            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\"" + rslt + "\" size=6>");
+            String name = "RSLT" + i;
+            out.println(" <br>");
+            out.println("   <td>Characteristic " + (i + 1) + " :");
+            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\" \" size=6>");
         }
         out.println("  </tr>");
         out.println(" </table>");
         out.println(" <br>");
         out.println(" <br>");
         out.println(" <input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
+        out.println(" <input type=\"submit\" value=\"" + OperationShow + "\" name=\"Operation\">");
         out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
         out.println("</form>");
         out.println("");
