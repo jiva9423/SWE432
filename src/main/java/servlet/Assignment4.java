@@ -87,19 +87,20 @@ public class Assignment4 extends HttpServlet
             numInputs = rslt;
         }
 
-        String Showvalues = "";
+        String showValues = "";
         if (operation.equals(OperationShow))
         {
+            rslt = charNumVal;
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + numInputs);
-                Showvalues += " " + c;
+                showValues += " " + c;
             }
         }
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        PrintBody(out, characteristicStr, rslt);
+        PrintBody(out, characteristicStr, rslt, showValues);
         PrintTail(out);
     }  // End doPost
 
@@ -137,7 +138,7 @@ public class Assignment4 extends HttpServlet
      *  Prints the <BODY> of the HTML page with the form data
      *  values from the parameters.
      ********************************************************* */
-    private void PrintBody (PrintWriter out, String charNum, int rslt)
+    private void PrintBody (PrintWriter out, String charNum, int rslt, String show)
     {
         out.println("<body>");
         out.println("<p>");
@@ -159,6 +160,10 @@ public class Assignment4 extends HttpServlet
             out.println("   <td>Characteristic " + (i + 1) + " :");
             out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\" \" size=6>");
         }
+
+        out.println("<p>");
+        out.println("");
+        out.println("</p>");
         out.println("  </tr>");
         out.println(" </table>");
         out.println(" <br>");
@@ -167,7 +172,7 @@ public class Assignment4 extends HttpServlet
         out.println(" <input type=\"submit\" value=\"" + OperationShow + "\" name=\"Operation\">");
         out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
         out.println("</form>");
-        out.println("");
+        out.println(show);
         out.println("</body>");
     } // End PrintBody
 
@@ -177,7 +182,7 @@ public class Assignment4 extends HttpServlet
      ********************************************************* */
     private void PrintBody (PrintWriter out)
     {
-        PrintBody(out, "", 0);
+        PrintBody(out, "", 0, "");
     }
 
     /** *****************************************************
