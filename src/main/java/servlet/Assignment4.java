@@ -94,7 +94,7 @@ public class Assignment4 extends HttpServlet
             rslt = charNumVal;
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
-                vals.add(i, c);
+                vals.add(c);
                 showValues += " " + c;
             }
         }
