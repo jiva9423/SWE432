@@ -106,9 +106,6 @@ public class Assignment4 extends HttpServlet
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        if(operation.equals(OperationShow)){
-            out.println("alert('" + showValues + "');");
-        }
         PrintBody(out, characteristicStr, rslt, showValues, vals);
         PrintTail(out);
     }  // End doPost
