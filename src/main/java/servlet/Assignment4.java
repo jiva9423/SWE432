@@ -85,6 +85,9 @@ public class Assignment4 extends HttpServlet
         if (operation.equals(OperationSubmit))
         {
             rslt = charNumVal;
+            for(int i = 0; i < rslt; i++){
+                vals.add("");
+            }
             numInputs = rslt;
         }
 
