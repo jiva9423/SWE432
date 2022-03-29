@@ -20,6 +20,8 @@ public class AttributeServlet extends HttpServlet
 
         String name   = request.getParameter("attrib_name");
         String value  = request.getParameter("attrib_value");
+        String name2   = request.getParameter("attrib_name2");
+        String value2  = request.getParameter("attrib_value2");
         String remove = request.getParameter("attrib_remove");
 
         if (remove != null && remove.equals("on"))
@@ -31,6 +33,19 @@ public class AttributeServlet extends HttpServlet
             if ((name != null && name.length() > 0) && (value != null && value.length() > 0))
             {
                 session.setAttribute(name, value);
+            }
+
+        }
+
+        if (remove != null && remove.equals("on"))
+        {
+            session.removeAttribute(name2);
+        }
+        else
+        {
+            if ((name2 != null && name2.length() > 0) && (value2 != null && value2.length() > 0))
+            {
+                session.setAttribute(name2, value2);
             }
 
         }
@@ -60,6 +75,12 @@ public class AttributeServlet extends HttpServlet
         out.println(" Value: ");
         out.println(" <input type=\"text\" size=\"10\" name=\"attrib_value\">");
 
+        out.println(" Name2: ");
+        out.println(" <input type=\"text\" size=\"10\" name=\"attrib_name2\">");
+
+        out.println(" Value2: ");
+        out.println(" <input type=\"text\" size=\"10\" name=\"attrib_value2\">");
+
         out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
         out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
         out.println("</form>");
@@ -71,11 +92,17 @@ public class AttributeServlet extends HttpServlet
         {
             String att_name  = (String) e.nextElement();
             String att_value = (String) session.getAttribute(att_name);
+            String att_name2  = (String) e.nextElement();
+            String att_value2 = (String) session.getAttribute(att_name2);
 
             out.print  ("<br><b>Name:</b> ");
             out.println(att_name);
             out.print  ("<br><b>Value:</b> ");
             out.println(att_value);
+            out.print  ("<br><b>Name2:</b> ");
+            out.println(att_name2);
+            out.print  ("<br><b>Value2:</b> ");
+            out.println(att_value2);
         } //end while
 
         out.println("</body>");
