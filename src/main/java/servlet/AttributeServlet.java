@@ -27,24 +27,13 @@ public class AttributeServlet extends HttpServlet
         if (remove != null && remove.equals("on"))
         {
             session.removeAttribute(name);
+            session.removeAttribute(name2);
         }
         else
         {
             if ((name != null && name.length() > 0) && (value != null && value.length() > 0))
             {
                 session.setAttribute(name, value);
-            }
-
-        }
-
-        if (remove != null && remove.equals("on"))
-        {
-            session.removeAttribute(name2);
-        }
-        else
-        {
-            if ((name2 != null && name2.length() > 0) && (value2 != null && value2.length() > 0))
-            {
                 session.setAttribute(name2, value2);
             }
 
