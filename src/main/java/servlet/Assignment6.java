@@ -242,8 +242,8 @@ public class Assignment6 extends HttpServlet
             if (C.getNumBlocks()>maxCharacteristic)
                 maxCharacteristic= C.getNumBlocks();
         }
-        out.println("\n" + maxCharacteristic + " each-choice abstract tests");
         out.print("<br>");
+        out.println("\n" + maxCharacteristic + " each-choice abstract tests");
         for (int testNum=1; testNum<=maxCharacteristic; testNum++)
         {
             out.print("<br>");
