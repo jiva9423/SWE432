@@ -112,7 +112,7 @@ public class Assignment4 extends HttpServlet
                 }
                 showValues += "\n" + n + " [";
                 for(int j = 0; j < val; j++){
-                    showValues += j + " ";
+                    showValues += n + j + " ";
                 }
 
                 showValues += " ]";
