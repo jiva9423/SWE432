@@ -206,6 +206,7 @@ public class Assignment6 extends HttpServlet
         out.print("<br>");
         if(Characs.size() > 0){
             EC(out, Characs.size(), Characs);
+            out.print("<br>");
             BC(out, Characs.size(), Characs);
         }
         out.println("</body>");
@@ -242,6 +243,7 @@ public class Assignment6 extends HttpServlet
                 maxCharacteristic= C.getNumBlocks();
         }
         out.println("\n" + maxCharacteristic + " each-choice abstract tests");
+        out.print("<br>");
         for (int testNum=1; testNum<=maxCharacteristic; testNum++)
         {
             out.print("<br>");
@@ -274,7 +276,9 @@ public class Assignment6 extends HttpServlet
             C = Characs.get(CNum);
             numTests = numTests + (C.getNumBlocks()-1);
         }
+        out.print("<br>");
         out.println("\n" + numTests + " base-choice abstract tests");
+        out.print("<br>");
 
         // Create base test
         Vector<String> baseTest = new Vector<>();
