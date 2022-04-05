@@ -167,7 +167,12 @@ public class Assignment6 extends HttpServlet
     {
         out.println("<body>");
         out.println("<p>");
-        out.println("Assignment 6. Javier Talavera, David Blatman");
+        out.println("Assignment 6. Javier Talavera, David Blatman.");
+        out.println("<br>");
+        out.println("Collaboration Summary: In this assignment David worked on using the EC and BC methods from the provided ISP.java");
+        out.println(" files so we could use them in our program. Javi worked on allowing users to input characteristic" +
+                " names as well as taking the edited functions and adding them to the html. David and Javi both helped with the design and formatting of the UI.");
+        out.println("<br>");
         out.println("<a href=\"https://github.com/jiva9423/SWE432/blob/main/src/main/java/servlet/Assignment6.java\">GithubRepo</a>");
         out.println("multiple submit buttons.");
         out.println("</p>");
