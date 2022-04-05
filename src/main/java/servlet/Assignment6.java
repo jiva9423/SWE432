@@ -203,6 +203,7 @@ public class Assignment6 extends HttpServlet
         out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
         out.println("</form>");
         out.println(show);
+        out.print("<br>");
         if(Characs.size() > 0){
             EC(out, Characs.size(), Characs);
             BC(out, Characs.size(), Characs);
@@ -243,6 +244,7 @@ public class Assignment6 extends HttpServlet
         out.println("\n" + maxCharacteristic + " each-choice abstract tests");
         for (int testNum=1; testNum<=maxCharacteristic; testNum++)
         {
+            out.print("<br>");
             out.println("Abstract test " + testNum + ": [");
             for (int charNum=0; charNum<numCharacteristics; charNum++)
             {
@@ -293,6 +295,7 @@ public class Assignment6 extends HttpServlet
             for (int BNum=2; BNum<=C.getNumBlocks(); BNum++)
             {
                 nextTest.set(CNum, C.getName()+String.valueOf(BNum));
+                out.print("<br>");
                 out.println("Abstract test " + testNum + " = " + nextTest);
                 testNum++;
                 nextTest.set(CNum, baseTest.get(CNum));
