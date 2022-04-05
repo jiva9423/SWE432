@@ -103,6 +103,7 @@ public class Assignment4 extends HttpServlet
                 String n = request.getParameter("NAME" + i);
                 c = c.replaceAll(" ", "");
                 vals.add(c);
+                valNames.add(n);
                 int val = -1;
                 try{
                     val = Integer.parseInt(c);
