@@ -36,15 +36,15 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
         name = "assignment4",
-        urlPatterns = {"/assignment4"}
+        urlPatterns = {"/assignment6"}
 )
-public class Assignment4 extends HttpServlet
+public class Assignment6 extends HttpServlet
 {
 
     // Location of servlet.
 // static String Domain  = "cs.gmu.edu:8443";
 // static String Path    = "/offutt/servlet/";
-    static String Servlet = "assignment4";
+    static String Servlet = "assignment6";
 
     // Button labels
     static String OperationSubmit = "Submit";
@@ -164,7 +164,8 @@ public class Assignment4 extends HttpServlet
     {
         out.println("<body>");
         out.println("<p>");
-        out.println("Javier Talavera, David Blatman");
+        out.println("Assignment 6. Javier Talavera, David Blatman");
+        out.println("<a href=\"https://github.com/jiva9423/SWE432\">GithubRepo</a>");
         out.println("multiple submit buttons.");
         out.println("</p>");
         out.print  ("<form method=\"post\"");
