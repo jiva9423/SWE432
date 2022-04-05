@@ -69,6 +69,8 @@ public class Assignment6 extends HttpServlet
         ArrayList<String> valNames = new ArrayList<>();
         String operation = request.getParameter("Operation");
         String characteristicStr = request.getParameter("CHARNUM");
+        Vector<characteristic> Characs = new Vector<>();
+
         boolean errors = false;
 
         if(characteristicStr != null){
@@ -104,6 +106,7 @@ public class Assignment6 extends HttpServlet
                 c = c.replaceAll(" ", "");
                 vals.add(c);
                 valNames.add(n);
+                Characs.add(new characteristic(n, Integer.parseInt(c)));
                 int val = -1;
                 try{
                     val = Integer.parseInt(c);
@@ -122,7 +125,7 @@ public class Assignment6 extends HttpServlet
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        PrintBody(out, characteristicStr, rslt, showValues, vals,  valNames);
+        PrintBody(out, characteristicStr, rslt, showValues, vals,  valNames, Characs);
         PrintTail(out);
     }  // End doPost
 
@@ -160,7 +163,7 @@ public class Assignment6 extends HttpServlet
      *  Prints the <BODY> of the HTML page with the form data
      *  values from the parameters.
      ********************************************************* */
-    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals, ArrayList<String> valNames)
+    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals, ArrayList<String> valNames, Vector<characteristic> Characs)
     {
         out.println("<body>");
         out.println("<p>");
@@ -187,6 +190,10 @@ public class Assignment6 extends HttpServlet
             out.println("   <td><input type=\"number\" name=\"" + name + "\" value=\""+ vals.get(i)+" \" size=6>");
 
         }
+        if(Characs.size() > 0){
+            EC(out, Characs.size(), Characs);
+            BC(out, Characs.size(), Characs);
+        }
         out.println("</em>");
         out.println("<p>");
         out.println("");
@@ -209,7 +216,7 @@ public class Assignment6 extends HttpServlet
      ********************************************************* */
     private void PrintBody (PrintWriter out)
     {
-        PrintBody(out, "", 0, "", new ArrayList<String>(), new ArrayList<String>());
+        PrintBody(out, "", 0, "", new ArrayList<String>(), new ArrayList<String>(), new Vector<characteristic>());
     }
 
     /** *****************************************************
@@ -219,7 +226,81 @@ public class Assignment6 extends HttpServlet
     {
         out.println("");
         out.println("</html>");
-    } // End PrintTail
+    }
+
+    // Each-choice--print the blocks in each-choice order
+    private static void EC(PrintWriter out, int numCharacteristics, Vector<characteristic> Characs)
+    {
+        int maxCharacteristic=0;
+        String block;
+        characteristic C;
+        for (int charNum=0; charNum<numCharacteristics; charNum++)
+        {  // Find the maximum # blocks among the characteristics
+            C = Characs.get(charNum);
+            if (C.getNumBlocks()>maxCharacteristic)
+                maxCharacteristic= C.getNumBlocks();
+        }
+        out.println("\n" + maxCharacteristic + " each-choice abstract tests");
+        for (int testNum=1; testNum<=maxCharacteristic; testNum++)
+        {
+            out.print("Abstract test " + testNum + ": [");
+            for (int charNum=0; charNum<numCharacteristics; charNum++)
+            {
+                C=Characs.get(charNum);
+                block=C.getName();
+                out.print(block);
+                if (testNum<=C.getNumBlocks())
+                    out.print(testNum);
+                else // no more blocks, use wild card
+                    out.print("*");
+                if (charNum<numCharacteristics-1)
+                    out.print(", ");
+            }
+            out.println("]");
+        }
+    } // end EC
+
+    // Base-choice--print the blocks in base-choice order
+// Assume base blocks are all '1'
+    private static void BC(PrintWriter out, int numCharacteristics, Vector<characteristic> Characs)
+    {
+        String block;
+        characteristic C;
+        int numTests = 1; // start at 1 for the base test
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        {  // Find the maximum # blocks among the characteristics
+            C = Characs.get(CNum);
+            numTests = numTests + (C.getNumBlocks()-1);
+        }
+        out.println("\n" + numTests + " base-choice abstract tests");
+
+        // Create base test
+        Vector<String> baseTest = new Vector<>();
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        {
+            C = Characs.get(CNum);
+            baseTest.add(C.getName()+"1");
+        }
+        out.print("Abstract test 1 (base): ");
+        out.println(baseTest);
+
+        // non-base tests
+        Vector<String> nextTest = new Vector<>(baseTest);
+        int testNum = 2;
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        { // for (int BNum=2; BNum<=3; BNum++)
+            C = Characs.get(CNum);
+            for (int BNum=2; BNum<=C.getNumBlocks(); BNum++)
+            {
+                nextTest.set(CNum, C.getName()+String.valueOf(BNum));
+                out.println("Abstract test " + testNum + " = " + nextTest);
+                testNum++;
+                nextTest.set(CNum, baseTest.get(CNum));
+            }
+        }
+    }
+
+
 
 }  // End twoButtons
 
