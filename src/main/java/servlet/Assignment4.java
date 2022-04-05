@@ -181,9 +181,9 @@ public class Assignment4 extends HttpServlet
             out.println("  <br>");
             out.println("  <tr>");
             out.println("   <td>Input Characteristic Name :");
-            out.println("   <input type=\"number\" name=\"" + name2 + "\" value=\""+ valNames.get(i)+" \" size=6>");
+            out.println("   <input type=\"text\" name=\"" + name2 + "\" value=\""+ valNames.get(i)+" \" size=6>");
             out.println("   Number of this characteristic:");
-            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\""+ vals.get(i)+" \" size=6>");
+            out.println("   <td><input type=\"number\" name=\"" + name + "\" value=\""+ vals.get(i)+" \" size=6>");
 
         }
         out.println("</em>");
