@@ -66,6 +66,7 @@ public class Assignment4 extends HttpServlet
         int rslt = 0;
         int charNumVal = 0;
         ArrayList<String> vals = new ArrayList<>();
+        ArrayList<String> valNames = new ArrayList<>();
         String operation = request.getParameter("Operation");
         String characteristicStr = request.getParameter("CHARNUM");
         boolean errors = false;
@@ -88,6 +89,7 @@ public class Assignment4 extends HttpServlet
             rslt = charNumVal;
             for(int i = 0; i < rslt; i++){
                 vals.add("");
+                valNames.add("");
             }
             numInputs = rslt;
         }
@@ -98,6 +100,7 @@ public class Assignment4 extends HttpServlet
             rslt = charNumVal;
             for(int i = 0; i < numInputs; i++){
                 String c = request.getParameter("RSLT" + i);
+                String n = request.getParameter("NAME" + i);
                 c = c.replaceAll(" ", "");
                 vals.add(c);
                 int val = -1;
@@ -106,9 +109,9 @@ public class Assignment4 extends HttpServlet
                 }catch (NumberFormatException e){
                     val = 0;
                 }
-                showValues += "\n Characteristic " + (i+1) + " [";
+                showValues += "\n" + n + " [";
                 for(int j = 0; j < val; j++){
-                    showValues += j + " ";
+                    showValues += n + j + " ";
                 }
 
                 showValues += " ]";
@@ -118,7 +121,7 @@ public class Assignment4 extends HttpServlet
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        PrintBody(out, characteristicStr, rslt, showValues, vals);
+        PrintBody(out, characteristicStr, rslt, showValues, vals,  valNames);
         PrintTail(out);
     }  // End doPost
 
@@ -156,7 +159,7 @@ public class Assignment4 extends HttpServlet
      *  Prints the <BODY> of the HTML page with the form data
      *  values from the parameters.
      ********************************************************* */
-    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals)
+    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals, ArrayList<String> valNames)
     {
         out.println("<body>");
         out.println("<p>");
@@ -173,10 +176,14 @@ public class Assignment4 extends HttpServlet
         out.println(" <em> </tr>");
         for(int i = 0; i < rslt; i++){
             String name = "RSLT" + i;
+            String name2 = "NAME" + i;
             out.println("  <br>");
             out.println("  <tr>");
-            out.println("   <td>Characteristic " + (i + 1) + " :");
-            out.println("   <td><input type=\"number\" name=\"" + name + "\" value=\""+vals.get(i)+" \" size=6>");
+            out.println("   <td>Input Characteristic Name :");
+            out.println("   <td><input type=\"text\" name=\"" + name + "\" value=\""+vals.get(i)+" \" size=6>");
+            out.println("   <td>Number of this characteristic:");
+            out.println("   <td><input type=\"number\" name=\"" + name2 + "\" value=\""+valNames.get(i)+" \" size=6>");
+
         }
         out.println("</em>");
         out.println("<p>");
@@ -200,7 +207,7 @@ public class Assignment4 extends HttpServlet
      ********************************************************* */
     private void PrintBody (PrintWriter out)
     {
-        PrintBody(out, "", 0, "", new ArrayList<String>());
+        PrintBody(out, "", 0, "", new ArrayList<String>(), new ArrayList<String>());
     }
 
     /** *****************************************************
