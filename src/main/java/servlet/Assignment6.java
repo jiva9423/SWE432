@@ -190,10 +190,6 @@ public class Assignment6 extends HttpServlet
             out.println("   <td><input type=\"number\" name=\"" + name + "\" value=\""+ vals.get(i)+" \" size=6>");
 
         }
-        if(Characs.size() > 0){
-            EC(out, Characs.size(), Characs);
-            BC(out, Characs.size(), Characs);
-        }
         out.println("</em>");
         out.println("<p>");
         out.println("");
@@ -207,6 +203,10 @@ public class Assignment6 extends HttpServlet
         out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
         out.println("</form>");
         out.println(show);
+        if(Characs.size() > 0){
+            EC(out, Characs.size(), Characs);
+            BC(out, Characs.size(), Characs);
+        }
         out.println("</body>");
     } // End PrintBody
 
