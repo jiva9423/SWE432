@@ -243,7 +243,7 @@ public class Assignment6 extends HttpServlet
         out.println("\n" + maxCharacteristic + " each-choice abstract tests");
         for (int testNum=1; testNum<=maxCharacteristic; testNum++)
         {
-            out.print("Abstract test " + testNum + ": [");
+            out.println("Abstract test " + testNum + ": [");
             for (int charNum=0; charNum<numCharacteristics; charNum++)
             {
                 C=Characs.get(charNum);
@@ -281,7 +281,7 @@ public class Assignment6 extends HttpServlet
             C = Characs.get(CNum);
             baseTest.add(C.getName()+"1");
         }
-        out.print("Abstract test 1 (base): ");
+        out.println("Abstract test 1 (base): ");
         out.println(baseTest);
 
         // non-base tests
