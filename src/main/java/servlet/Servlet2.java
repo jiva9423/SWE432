@@ -27,7 +27,6 @@ import java.util.*;
 // private void PrintTail (PrintWriter out) --> Prints the HTML bottom
 //***********************************************************************
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -36,16 +35,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
-        name = "assignment4",
-        urlPatterns = {"/assignment6"}
+        name = "servlet2",
+        urlPatterns = {"/servlet2"}
 )
-public class Assignment6 extends HttpServlet
+public class Servlet2 extends HttpServlet
 {
 
     // Location of servlet.
 // static String Domain  = "cs.gmu.edu:8443";
 // static String Path    = "/offutt/servlet/";
-    static String Servlet = "assignment6";
+    static String Servlet = "servlet2";
 
     // Button labels
     static String OperationSubmit = "Submit";
@@ -87,19 +86,47 @@ public class Assignment6 extends HttpServlet
             }
         }
 
+
         if (operation.equals(OperationSubmit))
         {
             rslt = charNumVal;
-            request.setAttribute("numChars", rslt);
-            RequestDispatcher r = request.getRequestDispatcher("servlet2");
-            r.forward(request, response);
+            for(int i = 0; i < rslt; i++){
+                vals.add("");
+                valNames.add("");
+            }
+            numInputs = rslt;
         }
 
+        String showValues = "";
+        if (operation.equals(OperationShow))
+        {
+            rslt = charNumVal;
+            for(int i = 0; i < numInputs; i++){
+                String c = request.getParameter("RSLT" + i);
+                String n = request.getParameter("NAME" + i);
+                c = c.replaceAll(" ", "");
+                vals.add(c);
+                valNames.add(n);
+                Characs.add(new characteristic(n, Integer.parseInt(c)));
+                int val = -1;
+                try{
+                    val = Integer.parseInt(c);
+                }catch (NumberFormatException e){
+                    val = 0;
+                }
+                showValues += "\n" + n + " [";
+                for(int j = 0; j < val; j++){
+                    showValues += n + j + " ";
+                }
+
+                showValues += " ]";
+            }
+        }
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         PrintHead(out);
-        PrintBody(out);
+        PrintBody(out, characteristicStr, rslt, showValues, vals,  valNames, Characs);
         PrintTail(out);
     }  // End doPost
 
@@ -137,7 +164,7 @@ public class Assignment6 extends HttpServlet
      *  Prints the <BODY> of the HTML page with the form data
      *  values from the parameters.
      ********************************************************* */
-    private void PrintBody (PrintWriter out, String charNum, int rslt)
+    private void PrintBody (PrintWriter out, String charNum, int rslt, String show, ArrayList<String> vals, ArrayList<String> valNames, Vector<characteristic> Characs)
     {
         out.println("<body>");
         out.println("<p>");
@@ -158,6 +185,17 @@ public class Assignment6 extends HttpServlet
         out.println("   <td>How many characteristics? (enter an integer greater than 0):");
         out.println("   <td><input type=\"text\" name=\"CHARNUM\" value=\""+charNum+"\" size=5>");
         out.println(" <em> </tr>");
+        for(int i = 0; i < rslt; i++){
+            String name = "RSLT" + i;
+            String name2 = "NAME" + i;
+            out.println("  <br>");
+            out.println("  <tr>");
+            out.println("   <td>Input Characteristic Name :");
+            out.println("   <input type=\"text\" name=\"" + name2 + "\" value=\""+ valNames.get(i)+" \" size=6>");
+            out.println("   Number of this characteristic:");
+            out.println("   <td><input type=\"number\" name=\"" + name + "\" value=\""+ vals.get(i)+" \" size=6>");
+
+        }
         out.println("</em>");
         out.println("<p>");
         out.println("");
@@ -167,8 +205,16 @@ public class Assignment6 extends HttpServlet
         out.println(" <br>");
         out.println(" <br>");
         out.println(" <input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
+        out.println(" <input type=\"submit\" value=\"" + OperationShow + "\" name=\"Operation\">");
         out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
         out.println("</form>");
+        out.println(show);
+        out.print("<br>");
+        if(Characs.size() > 0){
+            EC(out, Characs.size(), Characs);
+            out.print("<br>");
+            BC(out, Characs.size(), Characs);
+        }
         out.println("</body>");
     } // End PrintBody
 
@@ -178,7 +224,7 @@ public class Assignment6 extends HttpServlet
      ********************************************************* */
     private void PrintBody (PrintWriter out)
     {
-        PrintBody(out, "", 0);
+        PrintBody(out, "", 0, "", new ArrayList<String>(), new ArrayList<String>(), new Vector<characteristic>());
     }
 
     /** *****************************************************
@@ -188,6 +234,83 @@ public class Assignment6 extends HttpServlet
     {
         out.println("");
         out.println("</html>");
+    }
+
+    // Each-choice--print the blocks in each-choice order
+    private static void EC(PrintWriter out, int numCharacteristics, Vector<characteristic> Characs)
+    {
+        int maxCharacteristic=0;
+        String block;
+        characteristic C;
+        for (int charNum=0; charNum<numCharacteristics; charNum++)
+        {  // Find the maximum # blocks among the characteristics
+            C = Characs.get(charNum);
+            if (C.getNumBlocks()>maxCharacteristic)
+                maxCharacteristic= C.getNumBlocks();
+        }
+        out.print("<br>");
+        out.println("\n" + maxCharacteristic + " each-choice abstract tests");
+        for (int testNum=1; testNum<=maxCharacteristic; testNum++)
+        {
+            out.print("<br>");
+            out.println("Abstract test " + testNum + ": [");
+            for (int charNum=0; charNum<numCharacteristics; charNum++)
+            {
+                C=Characs.get(charNum);
+                block=C.getName();
+                out.print(block);
+                if (testNum<=C.getNumBlocks())
+                    out.print(testNum);
+                else // no more blocks, use wild card
+                    out.print("*");
+                if (charNum<numCharacteristics-1)
+                    out.print(", ");
+            }
+            out.println("]");
+        }
+    } // end EC
+
+    // Base-choice--print the blocks in base-choice order
+// Assume base blocks are all '1'
+    private static void BC(PrintWriter out, int numCharacteristics, Vector<characteristic> Characs)
+    {
+        String block;
+        characteristic C;
+        int numTests = 1; // start at 1 for the base test
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        {  // Find the maximum # blocks among the characteristics
+            C = Characs.get(CNum);
+            numTests = numTests + (C.getNumBlocks()-1);
+        }
+        out.print("<br>");
+        out.println("\n" + numTests + " base-choice abstract tests");
+        out.print("<br>");
+
+        // Create base test
+        Vector<String> baseTest = new Vector<>();
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        {
+            C = Characs.get(CNum);
+            baseTest.add(C.getName()+"1");
+        }
+        out.println("Abstract test 1 (base): ");
+        out.println(baseTest);
+
+        // non-base tests
+        Vector<String> nextTest = new Vector<>(baseTest);
+        int testNum = 2;
+        for (int CNum=0; CNum<numCharacteristics; CNum++)
+        { // for (int BNum=2; BNum<=3; BNum++)
+            C = Characs.get(CNum);
+            for (int BNum=2; BNum<=C.getNumBlocks(); BNum++)
+            {
+                nextTest.set(CNum, C.getName()+String.valueOf(BNum));
+                out.print("<br>");
+                out.println("Abstract test " + testNum + " = " + nextTest);
+                testNum++;
+                nextTest.set(CNum, baseTest.get(CNum));
+            }
+        }
     }
 
 
