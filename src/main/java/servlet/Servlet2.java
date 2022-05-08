@@ -168,7 +168,7 @@ public class Servlet2 extends HttpServlet
     {
         out.println("<body>");
         out.println("<p>");
-        out.println("Assignment 6. Javier Talavera, David Blatman.");
+        out.println("Assignment 7. Javier Talavera, David Blatman.");
         out.println("<br>");
         out.println("<br>");
         out.println("<a href=\"https://github.com/jiva9423/SWE432/blob/main/src/main/java/servlet/Assignment6.java\">GithubRepo</a>");
