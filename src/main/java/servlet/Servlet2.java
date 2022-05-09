@@ -170,9 +170,10 @@ public class Servlet2 extends HttpServlet
         out.println("<p>");
         out.println("Assignment 7. Javier Talavera, David Blatman.");
         out.println("<br>");
+        out.println("We both worked together to design how we were going to forward the webapp on submit. We both worked on refactoring and debugging of the code for the initial servlet and the second servlet. ");
         out.println("<br>");
         out.println("<a href=\"https://github.com/jiva9423/SWE432/blob/main/src/main/java/servlet/Assignment6.java\">GithubRepo</a>");
-        out.println("multiple submit buttons.");
+        out.println("servlet.");
         out.println("</p>");
         out.print  ("<form method=\"post\"");
         out.println(" action=\""+Servlet+"\">"); // relative path used so it works in local and deploy runs
